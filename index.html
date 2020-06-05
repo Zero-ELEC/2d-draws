@@ -31,6 +31,23 @@
         }
       });
 
+      function generateRect() {
+        var topLeftX = pointX - (rad / 2);
+        var topLeftY = pointY - (rad);
+        var widthRect = rad * 2;
+        var heightRect = rad;
+
+        ctx.beginPath();
+        ctx.rect(topLeftX,topLeftY,widthRect,heightRect);
+        ctx.stroke();
+        isDrawn = true;
+          //point x,y = center
+          //top_left = x - rad / 4, y + rad / 2
+          //top_right = x + rad / 4, y + rad / 2
+          //bottom_left = x - rad / 4, y - rad / 2
+          //bottom_right = x - rad / 4, y + rad / 2
+      }
+
       function generate() {
         ctx.beginPath();
         ctx.arc(pointX, pointY, rad, 0,2*Math.PI);
@@ -74,6 +91,7 @@
     </script>
 
     <button type="button" onclick=generate()>Generate</button>
+    <button type="button" onclick="generateRect()">Rectangle</button>
     <button type="button" onclick="moveRight()">Move Right</button>
     <button type="button" onclick="moveLeft()">Move Left</button>
     <button type="button" onclick="moveUp()">Move Up</button>
