@@ -40,8 +40,10 @@
             break;
           case 1:
             generateRect();
+            break;
           case 2:
             generateStar();
+            break;
         }
 
       }
@@ -65,6 +67,7 @@
           //bottom_right = x - rad / 4, y + rad / 2
           // those are outdated
       }
+
       function generateCirc() {
         clearCanv();
         state = 0;
@@ -107,32 +110,39 @@
       function generateStar() {
         clearCanv();
         state = 2;
-        generateIrregSpikes(pointX, pointY, 5, (rad/2), rad);
+        generateIrregSpikes(pointX, pointY, 6, (rad/2), rad);
         isDrawn = true;
       }
+
       function moveRight() {
         pointX+=10;
         generate(pointX,pointY,rad);
       }
+
       function moveLeft() {
         pointX-=10;
         generate(pointX,pointY,rad);
       }
+
       function moveUp() {
         pointY-=10;
         generate(pointX,pointY,rad);
       }
+
       function moveDown() {
         pointY+=10;
         generate(pointX,pointY,rad);
       }
+
       function clearCanv(){
         isDrawn = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
+
       function changeSize(newVal){
         rad = newVal;
       }
+
     </script>
     <button type="button" onclick=generate()>Generate</button>
     <button type="button" onclick="clearCanv()">CLEAR????</button>
@@ -145,7 +155,6 @@
     <button type="button" onclick="moveLeft()">Move Left</button>
     <button type="button" onclick="moveUp()">Move Up</button>
     <button type="button" onclick="moveDown()">Move Down</button>
-
 
 
     <!-- why aint it working mmmmmmaaaaaaaaan -->
