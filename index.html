@@ -22,18 +22,33 @@
       var rad = 90;
       var ctx = canvas.getContext("2d");
       var isDrawn;
+      var state = 0; // 0 = circle, 1 = square, 2 = star,
+      // i need a button that switches modes??? like a switchboard? DONE HAHAHAH SUCK IT
 
       document.getElementById("radio").addEventListener("change", event => {
         rad = event.srcElement.valueAsNumber;
         if(isDrawn) {
           clearCanv();
           generate();
-        }
+        }//thank fucking god this works because im screaming here
       });
 
+      function generate() {
+        switch(state){
+          case 0:
+            generateCirc(pointX,pointY,rad);
+            break;
+          case 1:
+            generateRect();
+        }
+
+      }
+
       function generateRect() {
-        var topLeftX = pointX - (rad / 2);
-        var topLeftY = pointY - (rad);
+        clearCanv();
+        state = 1;
+        var topLeftX = pointX - (rad);
+        var topLeftY = pointY + (rad / 200);
         var widthRect = rad * 2;
         var heightRect = rad;
 
@@ -46,9 +61,12 @@
           //top_right = x + rad / 4, y + rad / 2
           //bottom_left = x - rad / 4, y - rad / 2
           //bottom_right = x - rad / 4, y + rad / 2
+          // those are outdated
       }
 
-      function generate() {
+      function generateCirc() {
+        clearCanv();
+        state = 0;
         ctx.beginPath();
         ctx.arc(pointX, pointY, rad, 0,2*Math.PI);
         ctx.stroke();
@@ -56,25 +74,21 @@
       }
 
       function moveRight() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         pointX+=10;
         generate(pointX,pointY,rad);
       }
 
       function moveLeft() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         pointX-=10;
         generate(pointX,pointY,rad);
       }
 
       function moveUp() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         pointY-=10;
         generate(pointX,pointY,rad);
       }
 
       function moveDown() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         pointY+=10;
         generate(pointX,pointY,rad);
       }
@@ -91,13 +105,12 @@
     </script>
 
     <button type="button" onclick=generate()>Generate</button>
+    <button type="button" onclick="generateCirc()">Circle</button>
     <button type="button" onclick="generateRect()">Rectangle</button>
     <button type="button" onclick="moveRight()">Move Right</button>
     <button type="button" onclick="moveLeft()">Move Left</button>
     <button type="button" onclick="moveUp()">Move Up</button>
     <button type="button" onclick="moveDown()">Move Down</button>
-
-
 
 
     <button type="button" onclick="clearCanv()">CLEAR????</button>
